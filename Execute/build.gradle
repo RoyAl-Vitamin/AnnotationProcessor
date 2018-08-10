@@ -36,15 +36,3 @@ dependencies {
     implementation findProject(':annotation')
     annotationProcessor findProject(':processor')
 }
-
-/**
- * Динамическое подключение проекта библиотеки geliodroid.
- * Если проект библиотеки не доступен, то используется заданный артефакт.
- */
-//dependencies {
-//    implementation findProject(':annotation')
-//    annotationProcessor findProject(':processor')
-//    def artifact = 'biz.gelicon:geliodroid:2.3.109'
-//    def processor = findProject(':processor')
-//    compile processor != null ? processor : artifact
-//}
