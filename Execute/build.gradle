@@ -1,0 +1,50 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "net.ltgt.gradle:gradle-apt-plugin:0.18"
+    }
+}
+
+plugins {
+    id 'java'
+}
+apply plugin: 'java'
+apply plugin: "net.ltgt.apt-idea" // Для старых версий градла
+
+group 'vi.al.ro.processor'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileJava {
+    options.compilerArgs << "-AtypeIndexClassPackage=vi.al.ro.app"
+    options.compilerArgs << "-AtypeIndexClassName=SampleIndex"
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation findProject(':annotation')
+    annotationProcessor findProject(':processor')
+}
+
+/**
+ * Динамическое подключение проекта библиотеки geliodroid.
+ * Если проект библиотеки не доступен, то используется заданный артефакт.
+ */
+//dependencies {
+//    implementation findProject(':annotation')
+//    annotationProcessor findProject(':processor')
+//    def artifact = 'biz.gelicon:geliodroid:2.3.109'
+//    def processor = findProject(':processor')
+//    compile processor != null ? processor : artifact
+//}

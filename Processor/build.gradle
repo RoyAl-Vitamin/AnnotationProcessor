@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+}
+
+group 'ro.al.vi.processor'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+compileJava {
+    options.compilerArgs << "-AtypeIndexClassPackage=vi.al.ro.app"
+    options.compilerArgs << "-AtypeIndexClassName=MyIndex"
+}
+/**
+ * Динамическое подключение проекта библиотеки annotation.
+ * Если проект библиотеки не доступен, то используется заданный артефакт.
+ */
+dependencies {
+    def annotation = findProject(':annotation')
+    compile annotation
+//    def artifact = 'vi.al.ro.processor:annotation:1.0.0'
+//    def annotation = findProject(':geliodroid')
+//    compile annotation != null ? annotation : artifact
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/com.google.guava/guava
+    compile group: 'com.google.guava', name: 'guava', version: '23.0'
+    // https://mvnrepository.com/artifact/com.squareup/javapoet
+    compile group: 'com.squareup', name: 'javapoet', version: '1.11.1'
+}

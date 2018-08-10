@@ -1,0 +1,8 @@
+*.iml
+*.patch
+**/build/
+**/out/
+**/.idea/
+.gradle
+/build
+Thumbs.db

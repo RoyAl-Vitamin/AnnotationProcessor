@@ -1,0 +1,16 @@
+rootProject.name = 'Execute'
+
+/**
+ * Процедура для динамического подключения проекта из .ref файла.
+ * Может использоваться для упрощения отладки приложения.
+ */
+def optional = { n ->
+    File f = new File("$settingsDir/${n}.ref")
+    if (f.exists()) {
+        include ":$n"
+        project ":$n" setProjectDir new File(f.text)
+    }
+}
+
+optional 'processor'
+optional 'annotation'
